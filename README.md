@@ -11,7 +11,7 @@
 ```
 .
 ├── README.md
-├── Section 1
+├── Section_1
 │   ├── ANSWERS
 │   │   ├── ANSWER.md
 │   │   ├── genotype_merged.txt
@@ -19,16 +19,17 @@
 │   │   ├── rs7074440_plot.png
 │   │   ├── rs9273367_plot.png
 │   │   ├── rs9275530_plot.png
-│   │   └── rs9368219_plot.png
+│   │   ├── rs9368219_plot.png
+│   │   └── section1.csv
 │   ├── README.md
-│   ├── female_data_analysis_test.py
-│   ├── genotype_formation_test.py
+│   ├── __init__.py
 │   ├── genotypes.txt
-│   ├── male_data_analysis_test.py
 │   ├── phenotypes.txt
 │   ├── section1_solver.py
-├── Section 2
+│   └── service1_workbook.ipynb
+├── Section_2
 │   ├── ANSWERS
+│   │   ├── ANSWER.md
 │   │   ├── qnorm.txt
 │   │   └── violin_plot.png
 │   ├── ANSWERS.md
@@ -36,13 +37,19 @@
 │   ├── TIS_raw_input1.txt
 │   ├── TIS_raw_input2_regulation_status.txt
 │   └── workflow_runner.py
-└── Section 3
-    ├── ANSWERS
-    │   ├── ANSWERS.md
-    │   └── df.csv
-    ├── README.md
-    ├── section3_workbook.ipynb
-    └── section_3_assignment.py
+├── Section_3
+│   ├── ANSWERS
+│   │   ├── ANSWERS.md
+│   │   └── df.csv
+│   ├── README.md
+│   ├── section3_workbook.ipynb
+│   └── section_3_assignment.py
+├── requirements.txt
+└── tests
+    ├── __init__.py
+    ├── female_data_analysis_test.py
+    ├── genotype_formation_test.py
+    └── male_data_analysis_test.py
 ```
 
 ---
