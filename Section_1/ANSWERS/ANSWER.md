@@ -1,3 +1,14 @@
+## Glossary
+
+- Genotype: Genetic make up of a person
+- Phenotype: Observable characteristics of a person
+- Nucleotide: A nucleotide is the basic building block of nucleic acids (RNA and DNA)
+- SNP: A single nucleotide polymorphism (abbreviated SNP, pronounced snip) is a single nucleotide difference in the genome
+- RSID: A unique label ("rs" followed by a number) used by researchers and databases to identify a specific SNP
+- Allele: One of two or more alternative forms of a gene that arise by mutation and are found at the same genetic place
+
+--- 
+
 ## Question 1: 
 
 ### **File content overview**:
@@ -6,8 +17,7 @@ The 'genotypes.txt' file contains genetic data for a group of individuals.
 
 - Each row represents the genetic information of one person.
 - Columns stand for specific genetic markers or differences.
-
-The data indicates how gene variants are paired at these markers for each person.
+- The data indicates how Allels are paired at some genetic positions for each person.
 
 ### **Column explanations**:
 
@@ -34,5 +44,3 @@ Number of female (Gender = 0) patients under the age of 60 that have type II dia
 Number of Male (Gender = 1) patients over the age of 35, and with a BMI in the 3rd quartile have at least one missing genotype: 0
 
 ---
-
-
