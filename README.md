@@ -73,7 +73,7 @@ pip3 install -r requirements.txt
 Section 1:
 
 ```
-cd Section\ 1
+cd Section_1
 python3 section1_solver.py
 ```
 
@@ -81,7 +81,7 @@ python3 section1_solver.py
 Section 2:
 
 ```
-cd Section\ 2
+cd Section_2
 python3 workflow_runner.py
 ```
 
@@ -89,7 +89,7 @@ python3 workflow_runner.py
 Section 3:
 
 ```
-cd Section\ 3
+cd Section_3
 python3 section_3_assignment.py
 ```
 
