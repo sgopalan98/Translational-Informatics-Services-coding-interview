@@ -33,22 +33,27 @@ def form_genotypes():
 
     print("Genotype calls merged and saved as genotype_merged.txt")
 
-def generate_plots():
-    # Read phenotypes data
-    phenotypes = pd.read_csv("phenotypes.txt", sep="\t")
-
+def get_female_patients_under_60(phenotypes, genotypes):
     # Filter female patients under 60 with Type II Diabetes
     filtered_phenotypes = phenotypes[(phenotypes["Gender"] == 0) & (phenotypes["Age"] < 60) & (phenotypes["Type.II.Diabetes"] == 1)]
     # Extract the relevant IDs
     selected_ids = filtered_phenotypes["Arb_ID"].tolist()
 
-
-    # Read genotypes data
-    genotypes = pd.read_csv("genotype_merged.txt", sep="\t")
-    # Get the genotypes for this demographic
+     # Get the genotypes for this demographic
     selected_genotypes = genotypes[genotypes["#IID"].isin(selected_ids)]
     # Remove IID column from selected_genotypes
     selected_genotypes = selected_genotypes.drop(columns=["#IID"])
+    return selected_genotypes
+
+
+def generate_plots():
+    # Read phenotypes data
+    phenotypes = pd.read_csv("phenotypes.txt", sep="\t")
+
+    # Read genotypes data
+    genotypes = pd.read_csv("genotype_merged.txt", sep="\t")
+
+    selected_genotypes = get_female_patients_under_60(phenotypes, genotypes)
 
     # Plot genotype distribution for each variant
     for col in selected_genotypes.columns:
