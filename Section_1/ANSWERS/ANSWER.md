@@ -44,3 +44,8 @@ Number of female (Gender = 0) patients under the age of 60 that have type II dia
 Number of Male (Gender = 1) patients over the age of 35, and with a BMI in the 3rd quartile have at least one missing genotype: 0
 
 ---
+
+## Question 4:
+
+The data used to answer Q3 and Q4 is saved as 'section1.csv'
+
