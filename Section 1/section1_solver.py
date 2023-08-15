@@ -76,10 +76,10 @@ def get_old_males_with_high_bmi_missing_genotype(phenotypes, genotype_merged):
 
     # Calculate the quartiles for BMI
     bmi_quartiles = phenotypes["BMI"].quantile([0.25, 0.5, 0.75])
-    third_quartile_bmi = bmi_quartiles[0.75]
+    third_quantile_bmi = bmi_quartiles[0.75]
 
     # Filter for patients with BMI in the 3rd quartile
-    bmi_3rd_quartile_condition = male_patients["BMI"] >= third_quartile_bmi
+    bmi_3rd_quartile_condition = male_patients["BMI"] < third_quantile_bmi
 
     # Find out patients with missing genotypes
     missing_genotype_patients = genotype_merged[genotype_merged.isnull().any(axis=1)]["#IID"]

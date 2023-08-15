@@ -27,21 +27,21 @@ def main():
 
     df = pd.DataFrame(data)
     print(df)
-    # Melt the data frame on the 'Gender' column
-    melted_df = pd.melt(df, id_vars=['Column1', 'Column2', 'Column3'], value_vars=['Gender'], var_name='Attribute', value_name='Value')
-    # Sort the melted data frame
-    sorted_melted_df = melted_df.sort_values(by=['Column1', 'Column2', 'Column3'])
+    # Melt the data frame using 'Gender' - 4th column as ID (Assumption: Melting on a column)
+    melted_df = pd.melt(df, id_vars=['Gender'], var_name='Attribute', value_name='Value')
+    # Sort the melted data frame (Assumption: Sorting by Value)
+    sorted_melted_df = melted_df.sort_values(by = ['Value'])
     # Filter and return results for males from 'Column1'
-    filtered_male_df = sorted_melted_df[(sorted_melted_df['Value'] == 'male') & (sorted_melted_df['Attribute'] == 'Gender')]
+    filtered_male_df = sorted_melted_df[(sorted_melted_df["Attribute"] == "Column1") & (sorted_melted_df["Gender"] == "male")]
     
     print("Final dataframe")
     print(filtered_male_df)
 
-    print("Maximum value from Column 1 is ", filtered_male_df['Column1'].max())
-    print("Minimum value from Column 2 is ", filtered_male_df['Column2'].min())
-    print("Maximum value from Column 2 is ", filtered_male_df['Column2'].max())
+    print("Maximum value from Column 1 is ", melted_df[(melted_df["Attribute"] == "Column1")]['Value'].max())
+    print("Minimum value from Column 2 is ", melted_df[(melted_df["Attribute"] == "Column2")]['Value'].min())
+    print("Maximum value from Column 2 is ", melted_df[(melted_df["Attribute"] == "Column2")]['Value'].max())
 
-    filtered_male_df.to_csv('ANSWERS/df.csv', index = False, columns = ['Column1'])
+    filtered_male_df.to_csv('ANSWERS/df.csv', index = False)
 
 if __name__ == "__main__":
     main()

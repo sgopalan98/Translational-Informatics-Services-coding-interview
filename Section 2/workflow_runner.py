@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import qnorm
 
 def quant_norm(df_input):
     df = df_input.copy()
@@ -24,14 +25,14 @@ def quant_norm(df_input):
 
     # Sort and replace with means 
     for col in df:
-        ordered_data = np.searchsorted(np.sort(df[col]), df[col])
-        df[col] = [mean[index] for index in ordered_data]
+        ordered_indices = np.searchsorted(np.sort(df[col]), df[col])
+        df[col] = [mean[index] for index in ordered_indices]
     return df
 
 def generate_quant_normalization(data_path):
     # Load the data from the file
     df = pd.read_csv(data_path, sep="\t")
-    quant_norm_df = quant_norm(df.iloc[:, 1:])
+    quant_norm_df = qnorm.quantile_normalize(df.iloc[:, 1:])
     quant_norm_df.insert(0, "Gene", df['Gene'].values)
     quant_norm_df.to_csv('ANSWERS/qnorm.txt', index = False, sep = '\t')
     print("Quantitaive normalized data generated in qnorm.txt")
