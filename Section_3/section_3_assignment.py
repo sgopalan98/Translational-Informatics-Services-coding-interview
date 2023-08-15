@@ -33,7 +33,7 @@ def main():
     # Sort the melted data frame
     sorted_melted_df = melted_df.sort_values(by=['Column1', 'Column2', 'Column3'])
     # Filter and return results for males from 'Column1'
-    filtered_male_df = sorted_melted_df[(sorted_melted_df['Value'] == 'male') & (sorted_melted_df['Attribute'] == 'Gender')]
+    filtered_male_df = sorted_melted_df[(sorted_melted_df['Value'] == 'male')]
     
     print("Final dataframe")
     print(filtered_male_df)
