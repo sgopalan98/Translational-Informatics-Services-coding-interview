@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Section 1 solver!
+
+@author: Santy
+"""
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -45,7 +52,6 @@ def get_female_patients_under_60(phenotypes, genotypes):
     selected_genotypes = selected_genotypes.drop(columns=["#IID"])
     return selected_genotypes
 
-
 def generate_plots():
     # Read phenotypes data
     phenotypes = pd.read_csv("phenotypes.txt", sep="\t")
@@ -70,32 +76,37 @@ def generate_plots():
 
 def get_old_males_with_high_bmi_missing_genotype(phenotypes, genotype_merged):
 
-    # Define the conditions
+    # Get male patients
     male_patients = phenotypes[(phenotypes["Gender"] == 1)]
-    age_condition = male_patients["Age"] > 35
+    # Get old male patients
+    old_patients = male_patients[male_patients["Age"] > 35]
 
     # Calculate the quartiles for BMI
-    bmi_quartiles = phenotypes["BMI"].quantile([0.25, 0.5, 0.75])
-    third_quantile_bmi = bmi_quartiles[0.75]
+    bmi_quartiles = old_patients["BMI"].quantile([0.25, 0.5, 0.75])
+    second_quartile = bmi_quartiles[0.5]
+    third_quartile = bmi_quartiles[0.75]
 
-    # Filter for patients with BMI in the 3rd quartile
-    bmi_3rd_quartile_condition = male_patients["BMI"] < third_quantile_bmi
+    # Get old male patients whose BMI is in 3rd quartile
+    bmi_old_male_patients = old_patients[(old_patients["BMI"] >= second_quartile) & (old_patients["BMI"] < third_quartile)]
 
-    # Find out patients with missing genotypes
+    # Get missing genotype patients
     missing_genotype_patients = genotype_merged[genotype_merged.isnull().any(axis=1)]["#IID"]
 
-    # Apply the conditions
-    filtered_patients = male_patients[age_condition & bmi_3rd_quartile_condition & male_patients["Arb_ID"].isin(missing_genotype_patients)]
+    # Filter based on Gender, Age, BMI, Genotype missing
+    filtered_patients = bmi_old_male_patients[bmi_old_male_patients["Arb_ID"].isin(missing_genotype_patients)]
 
     # Display the count of such patients
     num_patients = len(filtered_patients)
     return num_patients
 
 if __name__ == '__main__':
+
     # Q2
     form_genotypes()
+
     # Q3
     generate_plots()
+
     # Q4
 
     # Read phenotypes data

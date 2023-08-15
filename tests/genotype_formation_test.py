@@ -1,4 +1,4 @@
-from section1_solver import merge_alleles
+from Section_1.section1_solver import merge_alleles
 
 # TEST 1: It should merge the alleles
 def test_merge_alleles_basic():

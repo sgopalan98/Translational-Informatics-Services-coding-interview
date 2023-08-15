@@ -1,5 +1,5 @@
 import pandas as pd
-from section1_solver import get_female_patients_under_60
+from Section_1.section1_solver import get_female_patients_under_60
 
 # Sample data for testing
 sample_phenotypes = pd.DataFrame({

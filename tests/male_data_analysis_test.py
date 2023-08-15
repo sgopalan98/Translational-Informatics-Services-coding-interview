@@ -1,4 +1,4 @@
-from section1_solver import get_old_males_with_high_bmi_missing_genotype
+from Section_1.section1_solver import get_old_males_with_high_bmi_missing_genotype
 import pandas as pd
 from io import StringIO
 
@@ -151,7 +151,7 @@ Arb_ID	Age	Gender	BMI	Type.II.Diabetes
 
 
 
-# TEST 4: Should return many as only many is < third quartile and has one of the genotypes missing
+# TEST 4: Should return 1 as only 1 is < third quartile and has one of the genotypes missing
 def test_filter_patients_missing():
     genotype_merged_test_data_many_missing = """
 #IID	rs1421085_1	rs1421085_2	rs7074440_1	rs7074440_2
@@ -174,7 +174,7 @@ def test_filter_patients_missing():
     result = get_old_males_with_high_bmi_missing_genotype(phenotypes_test_df, genotype_merged_test_df)
     
     # Expected results for the test data
-    expected_result = 4
+    expected_result = 1
     
     assert result == expected_result, f"Expected: {expected_result}, Got: {result}"
 
@@ -182,7 +182,7 @@ def test_filter_patients_missing():
 
 
 
-# TEST 5: Should return all values >= 3rd quantile (all data - male, above 35)
+# TEST 5: Should return all values < third quartile (all data - male, above 35)
 def test_filter_patients_all():
 
     genotype_merged_test_data_all = """
@@ -206,6 +206,6 @@ def test_filter_patients_all():
     result = get_old_males_with_high_bmi_missing_genotype(phenotypes_test_df, genotype_merged_test_df)
     
     # Expected results for the test data
-    expected_result = 7
+    expected_result = 2
     
     assert result == expected_result, f"Expected: {expected_result}, Got: {result}"
