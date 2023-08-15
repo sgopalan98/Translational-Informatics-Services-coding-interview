@@ -13,13 +13,16 @@ np.random.seed(42) # Do not edit this line!
 
 
 def main():
+    # Male female values - shuffled
+    male_female_arrays = np.array(['male'] * 5 + ['female'] * 5)
+    np.random.shuffle(male_female_arrays)
     # Create the data frame
     num_rows = 10
     data = {
         'Column1': np.random.randint(0, 101, size=num_rows),
         'Column2': np.random.randint(0, 101, size=num_rows),
         'Column3': np.random.randint(0, 101, size=num_rows),
-        'Gender': np.random.choice(['female', 'male'], size=num_rows, p=[0.5, 0.5])
+        'Gender': male_female_arrays
     }
 
     df = pd.DataFrame(data)
@@ -37,7 +40,7 @@ def main():
     print("Minimum value from Column 2 is ", filtered_male_df['Column2'].min())
     print("Maximum value from Column 2 is ", filtered_male_df['Column2'].max())
 
-    filtered_male_df['Column1'].to_csv('df.csv', index = False)
+    filtered_male_df.to_csv('df.csv', index = False, columns = ['Column1'])
 
 if __name__ == "__main__":
     main()

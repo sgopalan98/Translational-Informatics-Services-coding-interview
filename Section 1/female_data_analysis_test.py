@@ -1,4 +1,3 @@
-import pytest
 import pandas as pd
 from section1_solver import get_female_patients_under_60
 
