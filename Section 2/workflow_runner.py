@@ -33,7 +33,7 @@ def generate_quant_normalization(data_path):
     df = pd.read_csv(data_path, sep="\t")
     quant_norm_df = quant_norm(df.iloc[:, 1:])
     quant_norm_df.insert(0, "Gene", df['Gene'].values)
-    quant_norm_df.to_csv('qnorm.txt', index = False, sep = '\t')
+    quant_norm_df.to_csv('ANSWERS/qnorm.txt', index = False, sep = '\t')
     print("Quantitaive normalized data generated in qnorm.txt")
     return
 
@@ -59,7 +59,7 @@ def generate_violet_plot_wrt_regulation(data_path, regulation_path):
     plt.title("Distribution of Gene Expression 7 Across Regulation Status")
 
     # Save the plot as a PNG file
-    plt.savefig("violin_plot.png")
+    plt.savefig("ANSWERS/violin_plot.png")
     return
 
 

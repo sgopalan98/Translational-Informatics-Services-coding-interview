@@ -27,7 +27,7 @@ def form_genotypes():
         lines = input_file.readlines()
     
     output_text = merge_alleles(lines)
-    with open("genotype_merged.txt", "w") as output_file:
+    with open("ANSWERS/genotype_merged.txt", "w") as output_file:
         for row in output_text:
             output_file.write("\t".join(row) + "\n")
 
@@ -51,10 +51,11 @@ def generate_plots():
     phenotypes = pd.read_csv("phenotypes.txt", sep="\t")
 
     # Read genotypes data
-    genotypes = pd.read_csv("genotype_merged.txt", sep="\t")
+    genotypes = pd.read_csv("ANSWERS/genotype_merged.txt", sep="\t")
 
     selected_genotypes = get_female_patients_under_60(phenotypes, genotypes)
 
+    print("Number of female (Gender = 0) patients under the age of 60 that have type II diabetes (cases = 1):", len(selected_genotypes))
     # Plot genotype distribution for each variant
     for col in selected_genotypes.columns:
         plt.figure(figsize=(8, 6))
@@ -64,7 +65,7 @@ def generate_plots():
         plt.ylabel("Frequency")
         plt.xticks(rotation=0)
         plt.tight_layout()
-        plt.savefig(f"{col}_plot.png")
+        plt.savefig(f"ANSWERS/{col}_plot.png")
         plt.close()
 
 def get_old_males_with_high_bmi_missing_genotype(phenotypes, genotype_merged):
@@ -101,7 +102,7 @@ if __name__ == '__main__':
     phenotypes = pd.read_csv("phenotypes.txt", sep="\t")
 
     # Read genotype merged data
-    genotype_merged = pd.read_csv("genotype_merged.txt", sep="\t")
+    genotype_merged = pd.read_csv("ANSWERS/genotype_merged.txt", sep="\t")
     num_patients = get_old_males_with_high_bmi_missing_genotype(phenotypes, genotype_merged)
     print(f"Number of male patients over 35 with 3rd quartile BMI and missing genotypes: {num_patients}")
 

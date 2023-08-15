@@ -26,6 +26,7 @@ def main():
     }
 
     df = pd.DataFrame(data)
+    print(df)
     # Melt the data frame on the 'Gender' column
     melted_df = pd.melt(df, id_vars=['Column1', 'Column2', 'Column3'], value_vars=['Gender'], var_name='Attribute', value_name='Value')
     # Sort the melted data frame
@@ -40,7 +41,7 @@ def main():
     print("Minimum value from Column 2 is ", filtered_male_df['Column2'].min())
     print("Maximum value from Column 2 is ", filtered_male_df['Column2'].max())
 
-    filtered_male_df.to_csv('df.csv', index = False, columns = ['Column1'])
+    filtered_male_df.to_csv('ANSWERS/df.csv', index = False, columns = ['Column1'])
 
 if __name__ == "__main__":
     main()
