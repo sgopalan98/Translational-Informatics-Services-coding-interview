@@ -1,18 +1,14 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-
-def form_genotypes():
-    # Read the input genotypes.txt file
-    with open("genotypes.txt", "r") as input_file:
-        lines = input_file.readlines()
-
+def merge_alleles(input_text):
+    output_text = []
     # Extract header line
-    header = lines[0].strip().split()
+    header = input_text[0].strip().split()
 
     # Process each line of data and merge alleles into genotype calls
     genotype_calls = []
-    for line in lines[1:]:
+    for line in input_text[1:]:
         parts = line.strip().split("\t")
         iid = parts[0]
         genotypes = [f"{parts[i]}{parts[i+1]}" for i in range(1, len(parts), 2)]
@@ -20,12 +16,20 @@ def form_genotypes():
 
     # Modify the header to remove "_1" and "_2" suffixes
     modified_header = ["#IID"] + [rs.split("_")[0] for rs in header[1::2]]
+    output_text.append(modified_header)
+    for call in genotype_calls:
+        output_text.append(call)
+    return output_text
 
-    # Write the merged genotype calls to genotype_merged.txt
+def form_genotypes():
+    # Read the input genotypes.txt file
+    with open("genotypes.txt", "r") as input_file:
+        lines = input_file.readlines()
+    
+    output_text = merge_alleles(lines)
     with open("genotype_merged.txt", "w") as output_file:
-        output_file.write("\t".join(modified_header) + "\n")
-        for call in genotype_calls:
-            output_file.write("\t".join(call) + "\n")
+        for row in output_text:
+            output_file.write("\t".join(row) + "\n")
 
     print("Genotype calls merged and saved as genotype_merged.txt")
 
@@ -58,12 +62,7 @@ def generate_plots():
         plt.savefig(f"{col}_plot.png")
         plt.close()
 
-def get_old_males_with_high_bmi_missing_genotype():
-    # Read phenotypes data
-    phenotypes = pd.read_csv("phenotypes.txt", sep="\t")
-
-    # Read genotype merged data
-    genotype_merged = pd.read_csv("genotype_merged.txt", sep="\t")
+def get_old_males_with_high_bmi_missing_genotype(phenotypes, genotype_merged):
 
     # Define the conditions
     male_patients = phenotypes[(phenotypes["Gender"] == 1)]
@@ -92,7 +91,13 @@ if __name__ == '__main__':
     # Q3
     generate_plots()
     # Q4
-    num_patients = get_old_males_with_high_bmi_missing_genotype()
+
+    # Read phenotypes data
+    phenotypes = pd.read_csv("phenotypes.txt", sep="\t")
+
+    # Read genotype merged data
+    genotype_merged = pd.read_csv("genotype_merged.txt", sep="\t")
+    num_patients = get_old_males_with_high_bmi_missing_genotype(phenotypes, genotype_merged)
     print(f"Number of male patients over 35 with 3rd quartile BMI and missing genotypes: {num_patients}")
 
 

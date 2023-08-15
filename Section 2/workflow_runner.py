@@ -12,16 +12,20 @@ import matplotlib.pyplot as plt
 
 def quant_norm(df_input):
     df = df_input.copy()
-    #compute rank
-    dic = {}
+    #Sort the columns
+    data_dic = {}
     for col in df:
-        dic.update({col : sorted(df[col])})
-    sorted_df = pd.DataFrame(dic)
-    rank = sorted_df.mean(axis = 1).tolist()
-    #sort
+        data_dic.update({col : sorted(df[col])})
+    sorted_df = pd.DataFrame(data_dic)
+
+    
+    # Compute mean across data of the same rank
+    mean = sorted_df.mean(axis = 1).tolist()
+
+    # Sort and replace with means 
     for col in df:
-        t = np.searchsorted(np.sort(df[col]), df[col])
-        df[col] = [rank[i] for i in t]
+        ordered_data = np.searchsorted(np.sort(df[col]), df[col])
+        df[col] = [mean[index] for index in ordered_data]
     return df
 
 def generate_quant_normalization(data_path):
